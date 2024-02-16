@@ -16,8 +16,8 @@ Ensure you have eksctl, Terraform, AWS CLI v2, and Helm 3 installed and configur
 3. VPC Peering: Establish a VPC Peering connection between your MSK and EKS VPCs to ensure secure, internal communication.
 4. Routing and Security: Update routing tables and security groups to facilitate traffic flow between MSK and EKS components.
 5. Update default VPC security groups to allow traffic;
-6. IAM Roles for Service Accounts (IRSA): Set up IRSA for secure AWS service access from Kubernetes pods (see [Helm README](./kafka-client/README.md));
-7. Kafka Client Deployment: Deploy a Kafka client within Kubernetes for management and debugging of Kafka topics (see [Helm README](./kafka-client/README.md));
+6. IAM Roles for Service Accounts (IRSA): Set up IRSA for secure AWS service access from Kubernetes pods (see [Helm README](helm/kafka-client-go/README.md));
+7. Kafka Client Deployment: Deploy a Kafka client within Kubernetes for management and debugging of Kafka topics (see [Helm README](helm/kafka-client/README.md));
 8. Configuration: Follow the Kafka Client Configuration guide to optimize the client setup for application's environment (see [Kafka Client Configuration Notes](kafka-config/Install-Kafka-Client.md));
 
 ## Helpful AWS CLI Commands for Amazon MSK

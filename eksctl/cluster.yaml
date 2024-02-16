@@ -3,7 +3,7 @@ kind: ClusterConfig
 metadata:
   name: eks-kafka-demo
   region: us-east-1
-  version: "1.20"
+  version: "1.27"
 iam:
   withOIDC: true
 managedNodeGroups:
