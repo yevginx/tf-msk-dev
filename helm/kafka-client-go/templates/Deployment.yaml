@@ -1,0 +1,134 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-client-msk
+  labels:
+    app: kafka-client-msk
+    component: service
+spec:
+  replicas: {{ .Values.kafkaClientMSK.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: kafka-client-msk
+      component: service
+  template:
+    metadata:
+      labels:
+        app: kafka-client-msk
+        component: service
+    spec:
+      serviceAccountName: {{ .Values.kafkaClientMSK.serviceAccountName }}
+      containers:
+        - image: {{ .Values.kafkaClientMSK.image.image }}
+          name: kafka-client-msk
+          imagePullPolicy: {{ .Values.kafkaClientMSK.image.pullPolicy }}
+          command: [ "/bin/sh" ]
+          args: [ "-c", "tail -f /dev/null" ]
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: diagnostics-analysis-service
+  labels:
+    app: diagnostics-analysis-service
+    component: service
+spec:
+  ports:
+    - name: http
+      port: 8080
+  selector:
+    app: diagnostics-analysis-service
+    component: service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: diagnostics-analysis-service
+  labels:
+    app: diagnostics-analysis-service
+    component: service
+spec:
+  replicas: {{ .Values.kafkaDemoService.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: diagnostics-analysis-service
+      component: service
+  template:
+    metadata:
+      labels:
+        app: diagnostics-analysis-service
+        component: service
+    spec:
+      serviceAccountName: {{ .Values.kafkaDemoService.serviceAccountName }}
+      containers:
+        - image: {{ .Values.kafkaDemoService.image.image }}
+          name: kafka-demo-service-a
+          ports:
+            - containerPort: {{ .Values.kafkaDemoService.image.ports.containerPort }}
+          imagePullPolicy: {{ .Values.kafkaDemoService.image.pullPolicy }}
+          env:
+            - name: LOG_LEVEL
+              value: "trace"
+            - name: TOPIC1
+              value: "foo-topic"
+            - name: TOPIC2
+              value: "bar-topic"
+            - name: GROUP
+              value: "consumer-group-A"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: maintenance-scheduling-service
+  labels:
+    app: maintenance-scheduling-service
+    component: service
+spec:
+  ports:
+    - name: http
+      port: 8080
+  selector:
+    app: maintenance-scheduling-service
+    component: service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maintenance-scheduling-service
+  labels:
+    app: maintenance-scheduling-service
+    component: service
+spec:
+  replicas: {{ .Values.kafkaDemoService.replicaCount }}
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: maintenance-scheduling-service
+      component: service
+  template:
+    metadata:
+      labels:
+        app: maintenance-scheduling-service
+        component: service
+    spec:
+      serviceAccountName: {{ .Values.kafkaDemoService.serviceAccountName }}
+      containers:
+        - image: {{ .Values.kafkaDemoService.image.image }}
+          name: maintenance-scheduling-service
+          ports:
+            - containerPort: {{ .Values.kafkaDemoService.image.ports.containerPort }}
+          imagePullPolicy: {{ .Values.kafkaDemoService.image.pullPolicy }}
+          env:
+            - name: LOG_LEVEL
+              value: "trace"
+            - name: TOPIC1
+              value: "bar-topic"
+            - name: TOPIC2
+              value: "foo-topic"
+            - name: GROUP
+              value: "consumer-group-B"
