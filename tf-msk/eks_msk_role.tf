@@ -12,17 +12,9 @@ resource "aws_iam_role" "eks_kafka_demo_app_oidc_role" {
         Action : "sts:AssumeRoleWithWebIdentity",
         Condition : {
           "StringEquals" : {
-            "${var.oidc_id}" : "system:serviceaccount:${var.eks_namespace}:kafka-demo-app-sasl-scram-serviceaccount"
+            "${var.oidc_id}:sub" : "system:serviceaccount:${var.eks_namespace}:kafka-demo-app-sasl-scram-serviceaccount"
           }
         }
-      },
-      {
-        Effect : "Allow",
-        Principal : {
-          "AWS" : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/EKSKafkaDemoAppRole"
-        },
-        Action : "sts:AssumeRole",
-        Condition : {}
       }
     ]
   })
@@ -51,17 +43,9 @@ resource "aws_iam_role" "eks_kafka_client_msk_oidc_role" {
         Action : "sts:AssumeRoleWithWebIdentity",
         Condition : {
           "StringEquals" : {
-            "${var.oidc_id}" : "system:serviceaccount:${var.eks_namespace}:kafka-client-msk-sasl-scram-serviceaccount"
+            "${var.oidc_id}:sub" : "system:serviceaccount:${var.eks_namespace}:kafka-client-msk-sasl-scram-serviceaccount"
           }
         }
-      },
-      {
-        Effect : "Allow",
-        Principal : {
-          "AWS" : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/EKSKafkaClientMSKRole"
-        },
-        Action : "sts:AssumeRole",
-        Condition : {}
       }
     ]
   })
@@ -70,6 +54,7 @@ resource "aws_iam_role" "eks_kafka_client_msk_oidc_role" {
     Name = "EKS Kafka Client MSK OIDC Role"
   }
 }
+
 
 resource "aws_iam_role_policy_attachment" "kafka_client_msk_policy_attach" {
   role       = aws_iam_role.eks_kafka_client_msk_oidc_role.name
