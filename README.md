@@ -2,8 +2,6 @@
 
 This Terraform project demonstrates the integration of Amazon Managed Streaming for Apache Kafka (Amazon MSK) with Amazon Elastic Kubernetes Service (Amazon EKS) to test Railigent's rail diagnostics and predictive maintenance capabilities.
 
-![Graph](pics/graphviz.png)
-
 ## Overview
 
 Leveraging Amazon MSK, Railigent can process and analyze vast amounts of rail sensor data in real-time. Combined with Amazon EKS, this setup allows for scalable deployment of microservices that perform diagnostics analysis, anomaly detection, and maintenance scheduling.
@@ -50,8 +48,3 @@ terraform plan
 terraform apply
 ```
 
-## Results
-
-![Consumer](./pics/kafka_client.png)
-
----
