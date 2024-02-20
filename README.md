@@ -48,3 +48,6 @@ terraform plan
 terraform apply
 ```
 
+![Kafka ACLs Configuration](pics/Screenshot_2024-02-19_at_8.57.47_PM.png)
+![Pods Status](pics/Screenshot_2024-02-19_at_9.38.05_PM.png)
+![Helm Install Output](pics/PNG_image.png)
