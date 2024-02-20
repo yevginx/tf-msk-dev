@@ -48,8 +48,9 @@ terraform plan
 terraform apply
 ```
 
-![Kafka ACLs Configuration](pics/KafkaACLs.png)
-![Pods Status](pics/PodStatus.png)
-![Helm Install Output](pics/PNG%20image.png)
+![Kafka ACLs Configuration](pics/KafkaACLs.png "Kafka ACLs Configuration")
+![Pods Status](pics/PodStatus.png "Pods Status")
+<img src="pics/HelmInstallOutput.png" alt="Helm Install Output" title="Helm Install Output" width="600"/>
+
 
 
